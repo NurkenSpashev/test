@@ -14,3 +14,5 @@ python manage.py migrtate
 ```
 python manage.py runserver
 ```
+
+### Dont forget to give users permission to CRUDE tasks
