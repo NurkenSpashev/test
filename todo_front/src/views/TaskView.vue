@@ -86,13 +86,10 @@ export default {
   async toggleTask(task) {
     let formData = {
       id: task.id,
-      title: task.title,
-      description: task.description,
       status: task.status ? false : true,
-      author: task.author
     }
     if(this.$store.state.isLoggedIn) {
-      const response = await axios.put('http://localhost:8009/api/tasks/' + task.id + '/', formData);
+      const response = await axios.patch('http://localhost:8009/api/tasks/' + task.id + '/', formData);
       this.getData();
     }
   },
