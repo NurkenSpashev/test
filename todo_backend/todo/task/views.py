@@ -3,7 +3,6 @@ from .models import Task
 from .tasks import send_message
 
 from rest_framework import viewsets
-from django.core import serializers
 import json
 
 
@@ -21,11 +20,10 @@ class TaskViewSet(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         if request.method == 'PATCH':
             data = json.loads(request.body)
-            task = Task.objects.filter(pk=data.get('id'))
-            data = serializers.serialize('json', task)
+            task = Task.objects.get(pk=data.get('id'))
             email = request.user.email
 
-            send_message.delay(email, data)
+            send_message.delay(email, task.title)
 
         return super().update(request, *args, **kwargs)
 
