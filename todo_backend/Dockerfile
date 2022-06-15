@@ -20,7 +20,8 @@ RUN apt-get update && apt-get install -y \
 # install dependencies
 RUN pip install --upgrade pip --user
 COPY ./requirements.txt /usr/src/app/
-RUN pip install -r requirements.txt --user
+RUN pip install -r requirements.txt
+RUN pip install celery
 
 # copy project
 COPY /todo /usr/src/app/

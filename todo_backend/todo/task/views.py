@@ -1,9 +1,9 @@
 from .serializers import TaskSerializer
 from .models import Task
-
-from django.core.mail import send_mail
+from .tasks import send_message
 
 from rest_framework import viewsets
+from django.core import serializers
 import json
 
 
@@ -21,11 +21,11 @@ class TaskViewSet(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         if request.method == 'PATCH':
             data = json.loads(request.body)
-            task = Task.objects.get(pk=data.get('id'))
+            task = Task.objects.filter(pk=data.get('id'))
+            data = serializers.serialize('json', task)
             email = request.user.email
-            subject = "Sending an email with Django"
-            message = f"Dear, {email}, task {task.title} was updated."
 
-            send_mail(subject, message, 's.nurken92@gmail.com', [email])
+            send_message.delay(email, data)
+
         return super().update(request, *args, **kwargs)
 
