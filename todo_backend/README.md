@@ -1,18 +1,21 @@
-# todo_backend
+# TODO_BACKEND
 
-## Project setup
+### Start project
 ```
-pip install -r requirements.txt
+docker-compose up
 ```
 
 ### Run migrations 
 ```
-python manage.py migrtate
+> docker-compose exec web bash
+> python manage.py migrtate
+> python manage.py createsuperuser
 ```
 
-### Start project
+### Run celery 
 ```
-python manage.py runserver
+> docker-compose exec web bash
+> celery -A todo worker -l INFO
 ```
 
-### Dont forget to give users permission to CRUDE tasks
+### Don\'t forget to give users permission to CRUDE

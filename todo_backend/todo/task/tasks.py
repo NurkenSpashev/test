@@ -5,12 +5,6 @@ from django.core.mail import send_mail
 
 
 @shared_task
-def add():
-    print('Request')
-    pass
-
-
-@shared_task
 def send_message(email: str, task):
     print('Request')
 
