@@ -18,7 +18,7 @@
        }
     },
     beforeCreate() {
-      axios.defaults.BaseURL = "http://127.0.0.1:8000"
+      axios.defaults.BaseURL = "http://localhost:8009"
 
       this.$store.commit('initializeStore');
       const access = this.$store.state.access;

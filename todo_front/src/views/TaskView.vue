@@ -73,7 +73,7 @@ export default {
   async getData() {
     if(this.$store.state.isLoggedIn) {
       try {
-          const response = await axios.get('http://127.0.0.1:8000/api/tasks/');
+          const response = await axios.get('http://localhost:8009/api/tasks/');
           this.tasks = response.data;
           this.task = true;
           this.create = false;
@@ -92,7 +92,7 @@ export default {
       author: task.author
     }
     if(this.$store.state.isLoggedIn) {
-      const response = await axios.put('http://127.0.0.1:8000/api/tasks/' + task.id + '/', formData);
+      const response = await axios.put('http://localhost:8009/api/tasks/' + task.id + '/', formData);
       this.getData();
     }
   },
@@ -101,19 +101,19 @@ export default {
       this.edit = true;
       this.create = false;
       this.task = false;
-      const response = await axios.get('http://127.0.0.1:8000/api/tasks/' + task.id + '/');
+      const response = await axios.get('http://localhost:8009/api/tasks/' + task.id + '/');
       this.taskForm = response.data;
     }
   },
   async deleteTask(task) {
     if(this.$store.state.isLoggedIn) {
-      const response = await axios.delete('http://127.0.0.1:8000/api/tasks/' + task.id + '/');
+      const response = await axios.delete('http://localhost:8009/api/tasks/' + task.id + '/');
       this.getData();
     }
   },
   async updateTask(id) {
     if(this.$store.state.isLoggedIn) {
-      const response = await axios.put('http://127.0.0.1:8000/api/tasks/' + id + '/', this.taskForm);
+      const response = await axios.put('http://localhost:8009/api/tasks/' + id + '/', this.taskForm);
       this.getData();
     }
   },

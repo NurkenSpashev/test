@@ -56,7 +56,7 @@ export default {
           password: this.password
         }
         let vue = this
-        axios.post('http://127.0.0.1:8000/api/token/', formData)
+        axios.post('http://localhost:8009/api/token/', formData)
           .then(function(response) {
             if (response.data.hasOwnProperty('access')) {
               console.log(response.data)
@@ -66,7 +66,7 @@ export default {
               vue.$store.commit('setAccess', access)
 
               axios.defaults.headers.common['Authorization'] = 'Bearer ' + access
-              
+
               window.location.href = '/home';
             }
           })
